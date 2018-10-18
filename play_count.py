@@ -1,10 +1,10 @@
+import argparse
 import base64
 import datetime
 import json
 import math
 
 import requests
-
 from Crypto.Cipher import AES
 
 headers = {
@@ -119,6 +119,10 @@ def get_record_data(user_id):
     r = requests.post(record_url, data=post_data, headers=headers)
     json_data = r.json()
 
+    if json_data["code"] != 200:
+        print(json_data["msg"])
+        return
+
     t = datetime.datetime.today()
     file_name_prefix = "%04d%02d%02d_%s" % (t.year, t.month, t.day, user_id)
 
@@ -136,8 +140,15 @@ def get_record_data(user_id):
 
 
 def main():
-    user_id = "556458"
-    get_record_data(user_id)
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--id", help="需要计算播放次数的用户ID", action="store")
+    args = parser.parse_args()
+
+    if not args.id:
+        print("use \"--help\"")
+        return
+
+    get_record_data(args.id)
     print("done")
 
 

@@ -6,26 +6,29 @@
 
 ![](pics/play_count.png)
 
-## 依赖
+## 使用
 
-基于python3开发，需要安装的库如下：
+```text
+usage: play_count.py [-h] [--id ID]
+
+optional arguments:
+  -h, --help  show this help message and exit
+  --id ID     需要计算播放次数的用户ID
+```
+
+直接下载 `release` 下的exe，运行：
+
+```shell
+play_count.exe --id 29879272
+```
+
+或者通过python3运行代码文件，需要安装的库如下：
 
 - requests
 - pycrypto
 
-## 使用
-
-设定需要计算播放次数的用户id：
-
-```python
-def main():
-    user_id = "556458"
-    get_record_data(user_id)
-    print("done")
-```
-
-命令行运行
+运行：
 
 ```shell
-python play_count.py
+python play_count.py --id 29879272
 ```
